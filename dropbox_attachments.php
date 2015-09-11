@@ -33,7 +33,7 @@ class dropbox_attachments extends rcube_plugin
       $rcmail->output->set_env('dropbox_multiselect', $rcmail->config->get('dropbox_multiselect',true));
 
       $this->include_script('https://www.dropbox.com/static/api/2/dropins.js');
-      $this->include_script('attachments.min.js');      
+      $this->include_script('attachments.js');      
     }   
     
   }
@@ -72,7 +72,9 @@ class dropbox_attachments extends rcube_plugin
 
         // Fetch file
         $filepath = $this->download_fopen($file['link']);
+        //rcube::write_log('dropbox_attachments', link);
         //rcube::write_log('dropbox_attachments', $filepath);
+        rcube::write_log('dropbox_attachments', $file['link']);
         if(!$filepath)
           $err = "UPLOAD_ERR_FETCH";
 

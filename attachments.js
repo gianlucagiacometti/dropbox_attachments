@@ -10,20 +10,33 @@ if (window.rcmail) {
 	    success: function(files) {
     		var ts = new Date().getTime(),
     			content = '<span>' + rcmail.get_label('uploading' + (files.length > 1 ? 'many' : '')) + '</span>';       
-				rcmail.add2attachment_list(ts,{
-					html : content,
-					classname:"uploading",
-					complete:false
-				});
+	//			rcmail.add2attachment_list(ts,{
+	//				html : content,
+	//				classname:"uploading",
+	//				complete:false
+	//			});
 
-				var data = {
-					files: files,
-					_uploadid: ts,
-					_id: rcmail.env.compose_id
-				};
-				
-				var lock = rcmail.set_busy(true, 'uploading');										    			
-				rcmail.http_post('plugin.dropbox_attachments', data, lock);	        
+	//			var data = {
+	//				files: files,
+	//				_uploadid: ts,
+	//				_id: rcmail.env.compose_id
+	//			};
+		if(files != null && files.length>0){
+			for(var i = 0;i<files.length;i++){
+				var name = files[i].name;
+				var link = files[i].link;	
+				var icon = files[i].icon;
+				if(rcmail.editor.editor==null){
+					rcmail.editor.replace('['+name+'] : '+link+'\r\n');
+	                        }else if(rcmail.editor.editor!=null){
+                                //	rcmail.editor.editor.selection.setContent('</br><a href="'+link+'">'+name+'</a>');
+					rcmail.editor.editor.selection.setContent('</br><a href="'+link+'"><img src='+icon+' height="18" width="18">'+name+'</img></a>');
+                        	}
+			}
+		}
+	
+	//			var lock = rcmail.set_busy(true, 'uploading');										    			
+	//			rcmail.http_post('plugin.dropbox_attachments', data, lock);	        
 	    },
 	    cancel: function() {
 
