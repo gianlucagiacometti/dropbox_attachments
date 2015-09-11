@@ -1,7 +1,11 @@
 Roundcube Dropbox Attachment Plugin
 ===========================================
 
-Roundcube plugin to attach files from Dropbox. Uses Dropbox dropins api: https://www.dropbox.com/developers/dropins. NO php file size upload limitation.
+Uses Dropbox dropins api: https://www.dropbox.com/developers/dropins.
+
+This plugin is for adding large files to the message body as the share URL.
+It is based on dropbox api only and service clients need to the account of dropbox for each.
+
 
 Install
 =======
